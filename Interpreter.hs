@@ -13,7 +13,7 @@ eval expr env = case expr of
     Atom s       -> if (env (Atom s)) == (Atom "NULL") then (Atom s) else (env (Atom s))
     Apply e1 e2  -> case e1 of
         Lambda _ _ -> (evalLambda e1 env) (eval e2 env)
-        _          -> (eval e1 env) (eval e2 env)
+        _          -> (eval e1 env) (eval e2 env) -- This is broken
     _            -> error "Expression did not match correct lambda calculus forms."
 
 interpret :: Expression -> Expression
