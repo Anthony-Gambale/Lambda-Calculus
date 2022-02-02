@@ -1,0 +1,4 @@
+;; Testing scoped variable assignment
+;; Should evaluate to (y)
+(let ((x) (y))
+    (x))

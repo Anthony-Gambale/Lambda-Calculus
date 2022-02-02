@@ -28,10 +28,17 @@ getArgHelper cnt open close str = case str of
         | x == close && cnt > 1  -> x : (getArgHelper (cnt - 1) open close xs)
         | otherwise              -> x : (getArgHelper cnt open close xs)
 
+dropParens :: Program -> Program
+dropParens program = drop 1 (init program)
+
 parse :: Program -> E
 parse program
-    | notElem ')' program'           = Atom (program')
+    | notElem ')' program'        = Atom (program')
     | take 5 program' == "apply"  = Apply (parse (getFirstArg program')) (parse (getSecondArg program'))
     | take 6 program' == "lambda" = Lambda (parse (getFirstArg program')) (parse (getSecondArg program'))
+    | take 3 program' == "let"     = let name = (getFirstArg . dropParens) (getFirstArg program')
+                                         val = (getSecondArg . dropParens) (getFirstArg program')
+                                         rest = getSecondArg program'
+                                         in Let (parse name) (parse val) (parse rest)
     where
-        program' = drop 1 (init (program))
+        program' = dropParens program
