@@ -1,3 +1,4 @@
+;; This file tests comments and newlines
 (apply
     (lambda (x) (x))
     (y))

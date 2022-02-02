@@ -17,12 +17,19 @@ removeTabs tabMode str = case str of
             ' ' -> removeTabs True xs
             _   -> x : removeTabs False xs
 
+concatExceptComments :: [Program] -> Program
+concatExceptComments program = case program of
+    []   -> []
+    x:xs
+        | take 2 x == ";;" -> concatExceptComments xs
+        | otherwise        -> x ++ concatExceptComments xs
+
 main = do
     putStrLn "Enter path to file:"
     path <- getLine
     handle <- openFile path ReadMode
     content <- hGetContents handle
-    let program = removeTabs False ((foldr (++) "") (lines content))
+    let program = removeTabs False (concatExceptComments (lines content))
     print program
     print ((interpret . parse) program)
 

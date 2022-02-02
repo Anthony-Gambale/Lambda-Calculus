@@ -1,3 +1,4 @@
+;; Should evaluate to (apply (y) (z))
 (apply
     (lambda (x)
         (apply (y) (x)))
