@@ -13,8 +13,8 @@ eval :: Env -> E -> E
 eval env expr = case expr of
     Atom _           -> env expr
     Apply e1 e2      -> case eval env e1 of
-        Lambda _ _  -> eval env ((evalLambda env e1) e2)
-        _           -> Apply expr (eval env e2)
+        Lambda _ _  -> (evalLambda env e1) (eval env e2)
+        other       -> Apply other (eval env e2)
     _           -> expr
 
 interpret :: E -> E
