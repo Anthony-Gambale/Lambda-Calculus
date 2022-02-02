@@ -1,7 +1,7 @@
 # Lambda-Calculus
 Interpreter for the lambda calculus with lisp-like syntax.
 
-The following example program:
+For example, the following example program:
 ```
 (apply
     (lambda (atom x) (atom x))
