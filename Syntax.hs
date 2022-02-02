@@ -3,9 +3,9 @@ module Syntax where
 
 type Program = String
 
-data Expression = Atom String
-                | Lambda Expression Expression
-                | Apply Expression Expression
-                  deriving (Eq, Show)
+data Expr = Atom String
+          | Lambda Expr Expr
+          | Apply Expr Expr
+            deriving (Eq, Show)
 
-type Environment = Expression -> Expression
+type Env = Expr -> Expr

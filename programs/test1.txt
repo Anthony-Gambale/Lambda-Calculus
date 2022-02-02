@@ -1,1 +1,1 @@
-(apply (lambda (atom x) (atom x)) (atom y))
+(apply (lambda (x) (x)) (y))

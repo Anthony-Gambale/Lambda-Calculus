@@ -1,0 +1,4 @@
+(apply
+    (lambda (x)
+        (apply (y) (x)))
+    (z))

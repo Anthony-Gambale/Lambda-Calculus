@@ -26,7 +26,7 @@ main = do
     print program
     print ((interpret . parse) program)
 
-evaluate = do
+repl = do
     content <- getLine
     let program = removeTabs False content
     print ((interpret . parse) program)
