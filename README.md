@@ -7,7 +7,6 @@ For example, the following program
     (lambda (x)
         (apply (x) (x)))
     (y))
-
 ```
 Evaluates to
 ```
