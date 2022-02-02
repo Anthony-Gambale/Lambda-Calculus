@@ -1,0 +1,37 @@
+
+module Parser where
+
+import Syntax
+
+getBeforeInclusive :: Char -> Program -> Program
+getBeforeInclusive c s = case s of
+    x:xs -> if x == c then x : "" else x : getBeforeInclusive c xs
+    ""   -> ""
+
+getAfterInclusive :: Char -> Program -> Program
+getAfterInclusive c s = case s of
+    x:xs -> if x == c then x:xs else getAfterInclusive c xs
+    ""   -> ""
+
+getFirstArg :: Program -> Program
+getFirstArg = getArgHelper 0 '(' ')' . getAfterInclusive '('
+
+getSecondArg :: Program -> Program
+getSecondArg = reverse . getArgHelper 0 ')' '(' . getAfterInclusive ')' . reverse
+
+getArgHelper :: Int -> Char -> Char -> Program -> Program
+getArgHelper cnt open close str = case str of
+    "" -> ""
+    x:xs
+        | x == open              -> x : (getArgHelper (cnt + 1) open close xs)
+        | x == close && cnt == 1 -> close : ""
+        | x == close && cnt > 1  -> x : (getArgHelper (cnt - 1) open close xs)
+        | otherwise              -> x : (getArgHelper cnt open close xs)
+
+parse :: Program -> Expression
+parse program
+    | take 4 program' == "atom"   = Atom (drop 5 program')
+    | take 5 program' == "apply"  = Apply (parse (getFirstArg program')) (parse (getSecondArg program'))
+    | take 6 program' == "lambda" = Lambda (parse (getFirstArg program')) (parse (getSecondArg program'))
+    where
+        program' = drop 1 (init (program))
