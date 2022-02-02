@@ -4,11 +4,12 @@ Interpreter for the lambda calculus with lisp-like syntax.
 For example, the following program
 ```
 (apply
+    ;; Example comment
     (lambda (x)
-        (apply (x) (x)))
-    (y))
+        (apply (y) (x)))
+    (z))
 ```
 Evaluates to
 ```
-(apply (y) (y))
+(apply (y) (z))
 ```
