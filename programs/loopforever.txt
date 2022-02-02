@@ -1,5 +1,5 @@
 (apply
-    (lambda (atom x)
+    (lambda
+        (atom x)
         (apply (atom x) (atom x)))
-    (lambda (atom x)
-        (apply (atom x) (atom x))))
+    (atom y))
