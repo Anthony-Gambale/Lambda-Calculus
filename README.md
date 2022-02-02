@@ -1,2 +1,2 @@
-# LambdaCalculus
-Interpreter for the lambda calculus.
+# Lambda-Calculus
+Interpreter for the lambda calculus with lisp-like syntax.
