@@ -1,0 +1,9 @@
+(define (true) 
+    (lambda (x) (lambda (y) (x))))
+
+(define (false)
+    (lambda (x) (lambda (y) (y))))
+
+(define (and)
+    (lambda (p) (lambda (q)
+            (apply (apply (p) (q)) false))))

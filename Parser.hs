@@ -28,7 +28,7 @@ getArgHelper cnt open close str = case str of
         | x == close && cnt > 1  -> x : (getArgHelper (cnt - 1) open close xs)
         | otherwise              -> x : (getArgHelper cnt open close xs)
 
-parse :: Program -> Expr
+parse :: Program -> E
 parse program
     | notElem ')' program'           = Atom (program')
     | take 5 program' == "apply"  = Apply (parse (getFirstArg program')) (parse (getSecondArg program'))
