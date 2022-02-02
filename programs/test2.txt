@@ -1,4 +1,5 @@
 ;; This file tests comments and newlines
 (apply
+    ;; Indented comment test
     (lambda (x) (x))
     (y))

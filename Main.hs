@@ -21,7 +21,7 @@ concatExceptComments :: [Program] -> Program
 concatExceptComments program = case program of
     []   -> []
     x:xs
-        | take 2 x == ";;" -> concatExceptComments xs
+        | take 2 (dropWhile (==' ') x) == ";;" -> concatExceptComments xs
         | otherwise        -> x ++ concatExceptComments xs
 
 main = do
