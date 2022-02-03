@@ -7,6 +7,11 @@ import Interpreter
 import System.IO  
 import Control.Monad
 
+getBeforeExclusive :: Char -> Program -> Program
+getBeforeExclusive c s = case s of
+    x:xs -> if x == c then "" else x : getBeforeExclusive c xs
+    ""   -> ""
+
 removeTabs :: Bool -> Program -> Program
 removeTabs tabMode str = case str of
     "" -> ""
@@ -17,11 +22,14 @@ removeTabs tabMode str = case str of
             _   -> x : removeTabs False xs
 
 concatExceptComments :: [Program] -> Program
-concatExceptComments program = case program of
-    []   -> []
-    x:xs
-        | take 2 (dropWhile (==' ') x) == ";;" -> concatExceptComments xs
-        | otherwise        -> x ++ concatExceptComments xs
+concatExceptComments programs = foldr (++) "" (map (dropFinalWhitespace . getBeforeExclusive ';') programs)
+
+dropFinalWhitespace :: Program -> Program
+dropFinalWhitespace program = case program of
+    "" -> program
+    _  -> case last program of
+        ' ' -> dropFinalWhitespace (init program)
+        _   -> program
 
 main :: IO ()
 main = do
@@ -31,10 +39,4 @@ main = do
     content <- hGetContents handle
     let program = removeTabs False (concatExceptComments (lines content))
     -- print program
-    print ((interpret . parse) program)
-
-repl :: IO ()
-repl = do
-    content <- getLine
-    let program = removeTabs False content
     print ((interpret . parse) program)
