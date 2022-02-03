@@ -2,7 +2,6 @@
 module Interpreter where
 
 import Syntax
-import Data.Either
 
 -- | Turn lambda expressions into functions that return the beta-reduced body
 -- based on an input expression
