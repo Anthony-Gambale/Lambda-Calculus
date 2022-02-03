@@ -13,3 +13,12 @@ Evaluates to
 ```
 (apply (y) (z))
 ```
+This interpreter also features scoped variable assignment. The following
+```
+(let ((x) (lambda (z) (z)))
+    (apply (x) (y)))
+```
+Evaluates to
+```
+(y)
+```
