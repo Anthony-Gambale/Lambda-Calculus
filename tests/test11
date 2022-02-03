@@ -1,4 +1,6 @@
-;; Should print value of x
+;; Should print "value of x"
+;; Despite the environment being filled with other bindings
 (let ((x) (value of x))
      (let ((y) (value of y))
-          (x)))
+          (let ((z) (value of z))
+               (x))))
