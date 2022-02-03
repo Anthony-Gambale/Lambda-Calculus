@@ -1,0 +1,5 @@
+;; Should evaluate to
+;; (apply (apply (p) (q)) (r))
+(let ((id) (lambda (x) (x)))
+    (apply (apply (p) (q))
+        (apply (id) (r))))

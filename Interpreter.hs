@@ -16,7 +16,7 @@ eval env expr = case expr of
     Apply e1 e2      -> case eval env e1 of
         Lambda p b  -> eval env ((evalLambda env (Lambda p b)) e2)
         Atom s      -> Apply (Atom s) (eval env e2)
-        other       -> eval env (Apply other (eval env e2))
+        Apply a e   -> Apply (Apply a e) (eval env e2)
     _           -> expr
 
 interpret :: E -> E
