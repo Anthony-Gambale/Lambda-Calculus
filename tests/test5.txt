@@ -1,0 +1,3 @@
+;; Return the second element of a pair
+(apply (apply (lambda (fst) (lambda (snd) (snd)))
+    (a)) (b))

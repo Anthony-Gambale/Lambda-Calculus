@@ -1,3 +1,0 @@
-;; Return the first element of a pair
-(apply (apply (lambda (fst) (lambda (snd) (fst)))
-    (a)) (b))
