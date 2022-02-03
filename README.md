@@ -22,3 +22,9 @@ It evaluates to the following
 ```
 (y)
 ```
+For fun, this is a program that never terminates.
+```
+(let ((apply-self)
+      (lambda (x) (apply (x) (x))))
+      (apply (apply-self) (apply-self)))
+```

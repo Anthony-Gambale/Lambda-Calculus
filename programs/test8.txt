@@ -1,0 +1,4 @@
+;; This program should not terminate
+(let ((apply-self)
+      (lambda (x) (apply (x) (x))))
+      (apply (apply-self) (apply-self)))
