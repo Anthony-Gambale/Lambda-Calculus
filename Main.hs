@@ -13,7 +13,6 @@ removeTabs tabMode str = case str of
     x:xs
         | tabMode == False -> x : removeTabs (x == ' ') xs
         | tabMode == True  -> case x of
-            '(' -> x : removeTabs True xs
             ' ' -> removeTabs True xs
             _   -> x : removeTabs False xs
 
@@ -30,7 +29,7 @@ main = do
     handle <- openFile path ReadMode
     content <- hGetContents handle
     let program = removeTabs False (concatExceptComments (lines content))
-    -- print program
+    print program
     print ((interpret . parse) program)
 
 repl = do

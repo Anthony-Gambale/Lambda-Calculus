@@ -1,5 +1,6 @@
+;; Return the first element of a pair
 (apply
   (apply
     (lambda (a) (lambda (b) (a)))
-    (FIRST))
-  (SECOND))
+    (first input))
+  (second input))

@@ -1,3 +1,4 @@
 ;; Testing let expressions more rigorously
+;; Should evaluate to (y)
 (let ((x) (lambda (z) (z)))
     (apply (x) (y)))
