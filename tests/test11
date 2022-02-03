@@ -1,0 +1,4 @@
+;; Should print value of x
+(let ((x) (value of x))
+     (let ((y) (value of y))
+          (x)))
