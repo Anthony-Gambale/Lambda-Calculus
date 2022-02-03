@@ -23,6 +23,7 @@ concatExceptComments program = case program of
         | take 2 (dropWhile (==' ') x) == ";;" -> concatExceptComments xs
         | otherwise        -> x ++ concatExceptComments xs
 
+main :: IO ()
 main = do
     putStrLn "Enter path to file:"
     path <- getLine
@@ -32,6 +33,7 @@ main = do
     -- print program
     print ((interpret . parse) program)
 
+repl :: IO ()
 repl = do
     content <- getLine
     let program = removeTabs False content
