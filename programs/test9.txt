@@ -1,0 +1,5 @@
+(apply
+  (apply
+    (lambda (a) (lambda (b) (a)))
+    (FIRST))
+  (SECOND))
