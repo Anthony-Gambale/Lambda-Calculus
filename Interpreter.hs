@@ -4,14 +4,15 @@ module Interpreter where
 import Syntax
 import Data.Either
 
--- | Turn lambda expressions into functions that returns the beta-reduced body
+-- | Turn lambda expressions into functions that return the beta-reduced body
 -- based on an input expression
 evalLambda :: Env -> E -> (E -> E)
 evalLambda env expr = case expr of
     Lambda p b -> (\argument -> eval (\atom -> if atom == p then argument else env atom) b)
     _          -> error "Non lambda expression was evaluated as a lambda."
 
--- | Evaluate lambda calculus expressions recursively
+-- | Evaluate lambda calculus expressions recursively using
+-- an environment function to bind atoms to expressions
 eval :: Env -> E -> E
 eval env expr = case expr of
     Atom _      -> env expr
