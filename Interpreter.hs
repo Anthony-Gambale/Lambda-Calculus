@@ -22,6 +22,6 @@ eval env expr = case expr of
         irreducible -> Apply irreducible (eval env e2)
     _           -> expr
 
--- | Call to evaluate with a blank environment (the ID function)
+-- | Call to eval with a blank environment (the ID function)
 interpret :: E -> E
 interpret expr = eval (\x -> x) expr
