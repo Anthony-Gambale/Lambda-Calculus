@@ -15,7 +15,8 @@ eval env expr = case expr of
     Let a e1 e2      -> eval (\atom -> if atom == a then e1 else env atom) e2
     Apply e1 e2      -> case eval env e1 of
         Lambda p b  -> eval env ((evalLambda env (Lambda p b)) e2)
-        other       -> Apply (eval env e1) (eval env e2)
+        Atom s      -> Apply (Atom s) (eval env e2)
+        other       -> eval env (Apply other (eval env e2))
     _           -> expr
 
 interpret :: E -> E

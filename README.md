@@ -13,10 +13,10 @@ Evaluates to
 ```
 (apply (y) (z))
 ```
-This interpreter also features scoped variable assignment. The following program assigns the identity function to the value of x, and applies y to it.
+This interpreter also features scoped variable assignment. The following program assigns the identity function to the value of `identity`, and applies y to it.
 ```
-(let ((x) (lambda (z) (z)))
-    (apply (x) (y)))
+(let ((identity) (lambda (z) (z)))
+    (apply (identity) (y)))
 ```
 It evaluates to the following
 ```
