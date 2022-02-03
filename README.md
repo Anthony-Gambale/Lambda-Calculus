@@ -1,7 +1,8 @@
 # Lambda-Calculus
 Interpreter for the lambda calculus with lisp-like syntax.
 
-For example, the lambda expression `(\x.y x) z` would be written as
+## Examples
+The lambda expression `(\x.y x) z` would be written as
 ```
 (apply
     ;; Example comment
@@ -13,7 +14,9 @@ and evaluates to
 ```
 (apply (y) (z))
 ```
-or `y z` in lambda calculus notation. On top of traditional lambda calculus, this interpreter also features scoped variable assignment. The following program assigns the identity function to the value of `identity`, and applies `y` to it.
+or `y z` in lambda calculus notation.
+
+On top of the lambda calculus, this interpreter features scoped variable assignment. The following program assigns the identity function to the value of `identity`, and applies `y` to it.
 ```
 (let ((identity) (lambda (z) (z)))
     (apply (identity) (y)))
@@ -22,7 +25,7 @@ It evaluates to the following
 ```
 (y)
 ```
-For fun, this is a program that never terminates.
+For fun, this is a program that evaluates to itself (runs forever).
 ```
 (let ((apply-self)
       (lambda (x) (apply (x) (x))))
