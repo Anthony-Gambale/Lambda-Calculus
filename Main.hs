@@ -8,12 +8,12 @@ import Interpreter
 import System.IO  
 import Control.Monad
 
-getBeforeExclusive :: Char -> Program -> Program
+getBeforeExclusive :: Char -> Source -> Source
 getBeforeExclusive c s = case s of
     x:xs -> if x == c then "" else x : getBeforeExclusive c xs
     ""   -> ""
 
-removeTabs :: Bool -> Program -> Program
+removeTabs :: Bool -> Source -> Source
 removeTabs tabMode str = case str of
     "" -> ""
     x:xs
@@ -22,15 +22,15 @@ removeTabs tabMode str = case str of
             ' ' -> removeTabs True xs
             _   -> x : removeTabs False xs
 
-concatExceptComments :: [Program] -> Program
-concatExceptComments programs = foldr (++) "" (map (dropFinalWhitespace . getBeforeExclusive ';') programs)
+concatExceptComments :: [Source] -> Source
+concatExceptComments lines = foldr (++) "" (map (dropFinalWhitespace . getBeforeExclusive ';') lines)
 
-dropFinalWhitespace :: Program -> Program
-dropFinalWhitespace program = case program of
-    "" -> program
-    _  -> case last program of
-        ' ' -> dropFinalWhitespace (init program)
-        _   -> program
+dropFinalWhitespace :: Source -> Source
+dropFinalWhitespace source = case source of
+    "" -> source
+    _  -> case last source of
+        ' ' -> dropFinalWhitespace (init source)
+        _   -> source
 
 main :: IO ()
 main = do
@@ -38,5 +38,5 @@ main = do
     path <- getLine
     handle <- openFile path ReadMode
     content <- hGetContents handle
-    let program = removeTabs False (concatExceptComments (lines content))
-    print ((interpret . alphaConvert . parse) program)
+    let source = removeTabs False (concatExceptComments (lines content))
+    print ((interpret . alphaConvert . parse) source)
