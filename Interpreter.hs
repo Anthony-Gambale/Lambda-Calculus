@@ -19,7 +19,7 @@ eval env expr = case expr of
     Apply e1 e2 -> case eval env e1 of
         Lambda p b  -> eval env ((evalLambda env (Lambda p b)) (eval env e2))
         irreducible -> Apply irreducible (eval env e2)
-    _           -> expr
+    Lambda _ _  -> expr
 
 -- | Call to eval with a blank environment (the ID function)
 interpret :: E -> E
