@@ -3,4 +3,4 @@
 (let ((x) (value of x))
      (let ((y) (value of y))
           (let ((z) (value of z))
-               (x))))
+               (apply (x) (y)))))
