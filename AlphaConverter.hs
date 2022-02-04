@@ -17,18 +17,18 @@ rename (Atom from) (Atom to) expr = case expr of
 
 -- | Generate an atom from an integer
 gen :: Int -> Int -> E
-gen times n = Atom ((replicate '_' times) : (show n))
+gen times n = Atom ((replicate times '_') ++ (show n))
 
 -- | Short for Alpha Convert Helper
 ach :: [E] -> Int -> (Int -> E) -> E -> E
 ach used curr f expr = case expr of
     Atom a             -> Atom a
-    Apply e1 e2        -> Apply (ach used curr e1) (ach used curr e2)
-    Let (Atom a) e1 e2 -> Let (Atom a) (ach used curr e1) (ach used curr e2)
+    Apply e1 e2        -> Apply (ach used curr f e1) (ach used curr f e2)
+    Let (Atom a) e1 e2 -> Let (Atom a) (ach used curr f e1) (ach used curr f e2)
     Lambda (Atom a) e  -> let newAtom = f curr
                               newUsed = newAtom : used
                               renamedExpr = rename (Atom a) newAtom e
-                           in Lambda newAtom (ach newUsed (curr + 1) renamedExpr)
+                           in Lambda newAtom (ach newUsed (curr + 1) f renamedExpr)
     _                  -> error "Invalid lambda calculus expression."
 
 alphaConvert = ach [] 1 (gen 1)
