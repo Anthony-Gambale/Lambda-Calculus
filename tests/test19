@@ -1,0 +1,23 @@
+
+;; test very complex beta reduction
+
+(defglobal (identity)
+    (lambda (x) (x)))
+
+(defglobal (input-y)
+    (lambda (z)
+        (apply (z) (y))))
+
+(defglobal (input-w)
+    (lambda (z)
+        (apply (z) (w))))
+
+(defglobal (first-part)
+    (lambda (x)
+        (apply (identity)
+            (apply (input-y) (x)))))
+
+(defglobal (second-part)
+    (input-w))
+
+(apply (first-part) (second-part))
