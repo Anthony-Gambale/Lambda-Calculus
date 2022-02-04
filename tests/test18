@@ -1,0 +1,8 @@
+
+;; more testing of defglobal
+
+(defglobal (apply-self)
+    (lambda (function)
+        (apply (function) (function))))
+
+(apply (apply-self) (apply-self))
