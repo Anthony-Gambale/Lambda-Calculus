@@ -1,0 +1,5 @@
+
+(defglobal (identity)
+    (\(x) (x)))
+
+((identity) (Hello, World!))

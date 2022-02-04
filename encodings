@@ -1,0 +1,42 @@
+
+(defglobal (true)
+    (lambda (x)
+        (lambda (y) (x))))
+
+(defglobal (false)
+    (lambda (x)
+        (lambda (y) (y))))
+
+;; Apply the then-branch to the condition followed by the else branch
+;; Hopefully the condition evaluates to true or false
+(defglobal (if)
+    (lambda (condition)
+        (lambda (then-branch)
+            (lambda (else-branch)
+                (apply
+                    (apply (condition) (then-branch))
+                    (else-branch))))))
+
+;; Examples of using if
+(apply (apply (apply (if) (true)) (pick me!)) (dont pick me!))
+(apply (apply (apply (if) (false)) (dont pick me!)) (pick me!))
+
+;; Pairs
+(defglobal (pair)
+    (lambda (a)
+        (lambda (b)
+            (lambda (x)
+                (apply (apply (apply (if) (x)) (a)) (b))))))
+
+(defglobal (fst)
+    (lambda (p)
+        (apply (p) (true))))
+
+(defglobal (snd)
+    (lambda (p)
+        (apply (p) (false))))
+
+;; Examples of using pair
+(apply
+    (fst)
+    (apply (apply (pair) (pick me!)) (dont pick me!)))
