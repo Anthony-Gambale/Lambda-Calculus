@@ -6,3 +6,4 @@
         (apply (function) (function))))
 
 (apply (apply-self) (apply-self))
+
