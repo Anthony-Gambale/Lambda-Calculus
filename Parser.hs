@@ -42,6 +42,7 @@ dropFirstBlock = getBlocks . dropBlockHelper 0 '(' ')' . getBlocks
 dropParens :: Source -> Source
 dropParens source = drop 1 (init source)
 
+-- | Parse source code of an expression into an expression object
 parse :: Source -> E
 parse source
     | notElem ')' source'        = if head source' == '_' then error "Must not begin a variable name with _." else Atom (source')
