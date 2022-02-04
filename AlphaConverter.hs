@@ -18,7 +18,7 @@ rename (Atom from) (Atom to) expr = case expr of
 
 -- | Generate an atom from an integer
 gen :: Int -> Int -> E
-gen times n = Atom ((replicate times '_') ++ (show n))
+gen times n = Atom ('_' : (show times) ++ '_' : (show n))
 
 -- | Short for Alpha Convert Helper
 ach :: [E] -> Int -> (Int -> E) -> E -> E
