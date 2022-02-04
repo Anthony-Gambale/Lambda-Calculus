@@ -1,0 +1,7 @@
+
+;; Test defglobal
+
+(defglobal (identity)
+    (lambda (x) (x)))
+
+(apply (identity) (hello, world!))
