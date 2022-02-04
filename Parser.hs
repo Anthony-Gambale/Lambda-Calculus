@@ -25,6 +25,7 @@ getBlockHelper cnt open close str = case str of
         | otherwise              -> x : getBlockHelper cnt open close xs
 
 getFirstBlock = getBlockHelper 0 '(' ')' . getBlocks
+
 getSecondBlock = (getFirstBlock . dropFirstBlock)
 
 dropBlockHelper :: Int -> Char -> Char -> Source -> Source
