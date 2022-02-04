@@ -16,24 +16,27 @@ rename (Atom from) (Atom to) expr = case expr of
         continue = rename (Atom from) (Atom to)
 
 -- | Generate an atom from an integer
-gen :: Int -> E
-gen n = Atom ('_' : (show n))
+gen :: Int -> Int -> E
+gen times n = Atom ((replicate '_' times) : (show n))
 
 -- | Short for Alpha Convert Helper
-ach :: [E] -> Int -> E -> E
-ach used curr expr = case expr of
+ach :: [E] -> Int -> (Int -> E) -> E -> E
+ach used curr f expr = case expr of
     Atom a             -> Atom a
     Apply e1 e2        -> Apply (ach used curr e1) (ach used curr e2)
     Let (Atom a) e1 e2 -> Let (Atom a) (ach used curr e1) (ach used curr e2)
-    Lambda (Atom a) e  -> let newAtom = gen curr
+    Lambda (Atom a) e  -> let newAtom = f curr
                               newUsed = newAtom : used
                               renamedExpr = rename (Atom a) newAtom e
-                           in Lambda newAtom (ach newUsed (curr + 10) renamedExpr)
+                           in Lambda newAtom (ach newUsed (curr + 1) renamedExpr)
     _                  -> error "Invalid lambda calculus expression."
 
--- | Call to helper with default values
-alphaConvert :: E -> E
-alphaConvert = ach [] 10
+alphaConvert = ach [] 1 (gen 1)
 
 -- | Alpha convert series of expressions in order with the same "used" and "curr"
-alphaConvertProgram = alphaConvert
+acph :: Int -> Program -> Program
+acph curr program = case program of
+    []   -> []
+    ex:exs -> (ach used curr (gen curr) ex) : (acph (curr + 1) exs)
+
+alphaConvertProgram = acph [] 1
