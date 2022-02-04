@@ -32,5 +32,8 @@ ach used curr expr = case expr of
     _                  -> error "Invalid lambda calculus expression."
 
 -- | Call to helper with default values
-alphaConvert :: E -> E
-alphaConvert = ach [] 10
+alphaConvertExpr :: E -> E
+alphaConvertExpr = ach [] 10
+
+-- | Alpha convert entire program
+alphaConvert = alphaConvertExpr
