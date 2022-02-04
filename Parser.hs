@@ -33,7 +33,7 @@ dropParens program = drop 1 (init program)
 
 parse :: Program -> E
 parse program
-    | notElem ')' program'        = Atom (program')
+    | notElem ')' program'        = if head program' == '_' then error "Must not begin a variable name with _." else Atom (program')
     | take 5 program' == "apply"  = Apply (parse (getFirstArg program')) (parse (getSecondArg program'))
     | take 6 program' == "lambda" = Lambda (parse (getFirstArg program')) (parse (getSecondArg program'))
     | take 3 program' == "let"     = let name = (getFirstArg . dropParens) (getFirstArg program')

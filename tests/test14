@@ -1,0 +1,3 @@
+;; Should error
+(let ((_bad variable) (good variable!))
+    (_bad variable))
