@@ -21,8 +21,8 @@ eval env expr = case expr of
     _                  -> error "Invalid lambda calculus expression."
 
 -- | Call to eval with a blank environment (the ID function)
-interpretExpr :: E -> E
-interpretExpr expr = eval (\x -> x) expr
+interpret :: E -> E
+interpret expr = eval (\x -> x) expr
 
--- | Interpret entire program
-interpret = interpretExpr
+-- | Interpret series of expressions in order using the same environment
+interpretProgram = interpret

@@ -53,3 +53,10 @@ parse source
                                     in Let (parse name) (parse val) (parse rest)
     where
         source' = dropParens source
+
+
+-- | Parse entire list of expressions
+parseProgram :: Source -> [E]
+parseProgram src
+    | notElem ')' src = []
+    | otherwise       = (parse (getFirstBlock src)) : (parseProgram (dropFirstBlock src))
