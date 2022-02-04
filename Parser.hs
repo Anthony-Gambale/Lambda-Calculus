@@ -56,7 +56,7 @@ parse source
 
 
 -- | Parse entire list of expressions
-parseProgram :: Source -> [E]
+parseProgram :: Source -> Program
 parseProgram src
     | notElem ')' src = []
     | otherwise       = (parse (getFirstBlock src)) : (parseProgram (dropFirstBlock src))

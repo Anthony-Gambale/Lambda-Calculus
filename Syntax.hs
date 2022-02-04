@@ -3,6 +3,8 @@ module Syntax where
 
 type Source = String
 
+type Program = [E]
+
 -- | Expressions can either be atoms, lambdas or applications.
 data E = Atom String
        | Lambda E E
