@@ -3,6 +3,7 @@ module Main where
 
 import Syntax
 import Parser
+import AlphaConverter
 import Interpreter
 import System.IO  
 import Control.Monad
@@ -39,4 +40,4 @@ main = do
     content <- hGetContents handle
     let program = removeTabs False (concatExceptComments (lines content))
     -- print program
-    print ((interpret . parse) program)
+    print ((interpret . alphaConvert . parse) program)
