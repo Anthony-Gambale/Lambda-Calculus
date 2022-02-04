@@ -39,5 +39,4 @@ main = do
     handle <- openFile path ReadMode
     content <- hGetContents handle
     let source = removeTabs False (concatExceptComments (lines content))
-    print source
     print ((interpretProgram . alphaConvertProgram . parseProgram) source)
