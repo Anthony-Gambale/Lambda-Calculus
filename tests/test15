@@ -1,0 +1,9 @@
+;; Test multiple expressions
+
+(expression number one!)
+
+(apply
+    (lambda (x) (x))
+    (expression number two!))
+
+(expression number three!)
