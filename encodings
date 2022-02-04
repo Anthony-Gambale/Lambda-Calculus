@@ -41,15 +41,15 @@
     (fst)
     (apply (apply (pair) (pick me!)) (dont pick me!)))
 
-;; Church numerals
-;; Idea: n = \x.\y.<apply x to y, n times>
-
-(defglobal (0)
-    (\(x) (\(y) (y)))) ;; 0 is equivalent to false in the church encoding
-
+;; Scott numerals
+;; The Nth number is a lambda expression with 2N + 2 lambdas.
+;; So 0 has 2 lambdas. 1 has 4 lambdas. 2 has 6 lambdas. Et cetera.
 (defglobal (succ)
     (\(z) (\(x) (\(y)
-        ((x) (((z) (x)) (y)))))))
+        (apply (y) (z))))))
+
+(defglobal (0)
+    (\(x) (\(y) (x))))
 
 (defglobal (1)
     (apply (succ) (0)))
@@ -59,14 +59,4 @@
 
 (defglobal (3)
     (apply (succ) (2)))
-
-(defglobal (zero?)
-    (lambda (z)
-        (apply
-            ((z) (\(y) (false)))
-            (true))))
-
-;; Testing checking for 0
-(apply (zero?) (0)) ;; true <=> \x.\y.x
-(apply (zero?) (3)) ;; false <=> \x.\y.y
 

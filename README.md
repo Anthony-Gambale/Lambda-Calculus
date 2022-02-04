@@ -13,7 +13,10 @@ and evaluates to
 ```
 (apply (y) (z))
 ```
-or `y z` in lambda calculus notation.
+or `y z` in lambda calculus notation. Alternatively, it could be written in shorthand as
+```
+((\(x) ((y) (x))) (z))
+```
 
 On top of the lambda calculus, this interpreter features variable assignment. To temporarily assign a value inside a scope, use `let`.
 ```
