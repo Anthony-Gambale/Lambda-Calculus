@@ -1,0 +1,10 @@
+
+;; Test renaming
+
+(defglobal (identity)
+    (lambda (x) (x)))
+
+(defglobal (identity)
+    (This phrase replaces the lambda expression.))
+
+(identity)
