@@ -40,4 +40,4 @@ main = do
     content <- hGetContents handle
     let source = removeTabs False (concatExceptComments (lines content))
     print source
-    print ((alphaConvertProgram . parseProgram) source)
+    print ((interpretProgram . alphaConvertProgram . parseProgram) source)
