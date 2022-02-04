@@ -36,7 +36,7 @@ alphaConvert = ach [] 1 (gen 1)
 -- | Alpha convert series of expressions in order with the same "used" and "curr"
 acph :: Int -> Program -> Program
 acph curr program = case program of
-    []   -> []
+    []     -> []
     ex:exs -> (ach used curr (gen curr) ex) : (acph (curr + 1) exs)
 
 alphaConvertProgram = acph 1
