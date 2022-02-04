@@ -12,12 +12,13 @@ evalLambda env expr = case expr of
 -- | Evaluate lambda calculus expressions recursively using a function to bind atoms to expressions
 eval :: Env -> E -> E
 eval env expr = case expr of
-    Atom _      -> env expr
-    Let a e1 e2 -> eval (\atom -> if atom == a then e1 else env atom) e2
-    Apply e1 e2 -> case eval env e1 of
-        Lambda p b  -> eval env ((evalLambda env (Lambda p b)) (eval env e2))
-        irreducible -> Apply irreducible (eval env e2)
-    Lambda p b  -> Lambda p (eval env b)
+    Atom _             -> env expr
+    Let (Atom a) e1 e2 -> eval (\atom -> if atom == (Atom a) then e1 else env atom) e2
+    Apply e1 e2        -> case eval env e1 of
+        Lambda (Atom a) b -> eval env ((evalLambda env (Lambda (Atom a) b)) (eval env e2))
+        irreducible       -> Apply irreducible (eval env e2)
+    Lambda (Atom a) b  -> Lambda (Atom a) (eval env b)
+    _                  -> error "Invalid lambda calculus expression."
 
 -- | Call to eval with a blank environment (the ID function)
 interpret :: E -> E
