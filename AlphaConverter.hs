@@ -39,4 +39,4 @@ acph curr program = case program of
     []   -> []
     ex:exs -> (ach used curr (gen curr) ex) : (acph (curr + 1) exs)
 
-alphaConvertProgram = acph [] 1
+alphaConvertProgram = acph 1
