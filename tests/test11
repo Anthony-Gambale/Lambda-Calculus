@@ -1,4 +1,4 @@
-;; Should print "value of x"
+;; Should print (apply (value of x) (value of y))
 ;; Despite the environment being filled with other bindings
 (let ((x) (value of x))
      (let ((y) (value of y))
