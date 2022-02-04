@@ -1,5 +1,8 @@
 
-;; test very complex beta reduction
+; test very complex beta reduction
+
+; This program corresponds to the following lambda calculus program:
+; (\x.(\x.x)(\z.zy)x)(\z.zw) -> y w
 
 (defglobal (identity)
     (lambda (x) (x)))
