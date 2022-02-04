@@ -48,7 +48,7 @@ parse source
     | notElem ')' source'           = if head source' == '_' then error "Must not begin a variable name with _." else Atom (source')
     | take 5 source' == "apply"     = Apply (parse (getFirstBlock source')) (parse (getSecondBlock source'))
     | take 6 source' == "lambda"    = Lambda (parse (getFirstBlock source')) (parse (getSecondBlock source'))
-    | take 9 source' == "defglobal" = Defglobal (parse (getFirstBlock source') (parse (getSecondBlock source')))
+    | take 9 source' == "defglobal" = Defglobal (parse (getFirstBlock source')) (parse (getSecondBlock source'))
     | take 3 source' == "let"       = let name = (getFirstBlock . dropParens) (getFirstBlock source')
                                           val = (getSecondBlock . dropParens) (getFirstBlock source')
                                           rest = getSecondBlock source'
