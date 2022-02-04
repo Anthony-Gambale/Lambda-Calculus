@@ -36,9 +36,9 @@ parse source
     | notElem ')' source'        = if head source' == '_' then error "Must not begin a variable name with _." else Atom (source')
     | take 5 source' == "apply"  = Apply (parse (getFirstArg source')) (parse (getSecondArg source'))
     | take 6 source' == "lambda" = Lambda (parse (getFirstArg source')) (parse (getSecondArg source'))
-    | take 3 source' == "let"     = let name = (getFirstArg . dropParens) (getFirstArg source')
-                                         val = (getSecondArg . dropParens) (getFirstArg source')
-                                         rest = getSecondArg source'
-                                         in Let (parse name) (parse val) (parse rest)
+    | take 3 source' == "let"    = let name = (getFirstArg . dropParens) (getFirstArg source')
+                                       val = (getSecondArg . dropParens) (getFirstArg source')
+                                       rest = getSecondArg source'
+                                    in Let (parse name) (parse val) (parse rest)
     where
         source' = dropParens source
