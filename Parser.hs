@@ -36,7 +36,7 @@ dropBlockHelper cnt open close str = case str of
         | x == close && cnt > 1  -> dropBlockHelper (cnt - 1) open close xs
         | otherwise              -> dropBlockHelper cnt open close xs
 
-dropFirstBlock = dropBlockHelper 0 '(' ')' . getBlocks
+dropFirstBlock = getBlocks . dropBlockHelper 0 '(' ')' . getBlocks
 
 dropParens :: Source -> Source
 dropParens source = drop 1 (init source)
