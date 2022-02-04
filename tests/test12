@@ -1,0 +1,10 @@
+;; Tests alpha conversion
+;; Should evaluate to y z
+;; Should not evaluate to z z
+(apply
+    (apply
+        (lambda (x)
+            (lambda (y)
+                (apply (x) (y))))
+        (y))
+    (z))
