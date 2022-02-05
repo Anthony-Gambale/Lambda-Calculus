@@ -39,7 +39,7 @@ displayProgram (ex:exs) = do
     displayProgram exs
 
 displayProgram [] = do
-    putStrLn "Completed execution."
+    putStrLn ""
 
 main = do
     putStrLn "Enter path to file:"
