@@ -4,6 +4,7 @@ module Main where
 import Syntax
 import Parser
 import AlphaConverter
+import Replacer
 import Interpreter
 import System.IO  
 import Control.Monad
