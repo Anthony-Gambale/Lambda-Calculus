@@ -48,6 +48,18 @@
     (\(z) (\(x) (\(y)
         (apply (y) (z))))))
 
+(defglobal (pred)
+    (\(z)
+        (apply
+            ((z) (0))
+            (\(x) (x)))))
+
+(defglobal (?zero)
+    (\(z)
+        (apply
+            ((z) (true))
+            (\(x) (false)))))
+
 (defglobal (0)
     (\(x) (\(y) (x))))
 
@@ -60,3 +72,33 @@
 (defglobal (3)
     (apply (succ) (2)))
 
+;; Y combinator
+(defglobal (y-combinator)
+    (lambda (f)
+        (apply
+            (\(x) ((f) ((x) (x))))
+            (\(x) ((f) ((x) (x)))))))
+
+;; Plus helper function
+(defglobal (plus-helper)
+    (lambda (f) (lambda (n)
+        (apply
+            (apply
+                (apply
+                    (if)
+                    ((zero?) (n)))
+                (m))
+            (apply
+                (apply
+                    (f)
+                    ((pred) (n)))
+                ((succ) (m)))))))
+
+;; plus := P (Y P)
+(defglobal (plus)
+    (apply
+        (plus-helper)
+        (apply (y-combinator) (plus-helper))))
+
+;; Testing
+(plus)

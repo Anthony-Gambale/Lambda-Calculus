@@ -32,6 +32,13 @@ dropFinalWhitespace source = case source of
         ' ' -> dropFinalWhitespace (init source)
         _   -> source
 
+displayProgram (ex:exs) = do
+    print ex
+    displayProgram exs
+
+displayProgram [] = do
+    putStrLn "Completed execution."
+
 main :: IO ()
 main = do
     putStrLn "Enter path to file:"
@@ -39,4 +46,4 @@ main = do
     handle <- openFile path ReadMode
     content <- hGetContents handle
     let source = removeTabs False (concatExceptComments (lines content))
-    print ((interpretProgram . alphaConvertProgram . parseProgram) source)
+    displayProgram ((interpretProgram . alphaConvertProgram . parseProgram) source)
