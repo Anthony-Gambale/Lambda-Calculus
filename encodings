@@ -101,4 +101,4 @@
         (apply (y-combinator) (plus-helper))))
 
 ;; Testing
-(((plus) (0)) (3))
+; (((plus) (0)) (3))
