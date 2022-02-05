@@ -22,12 +22,16 @@ eval env expr = case expr of
 
 -- | evalp for Evaluate Program
 -- Use global environment to enable Defglobal expressions
+-- evalp :: Env -> Program -> Program
+-- evalp env program = case program of
+--     []     -> []
+--     ex:exs -> case ex of
+--         Defglobal (Atom a) e -> evalp (\atom -> if atom == (Atom a) then e else env atom) exs
+--         _                    -> (eval env ex) : (evalp env exs)
 evalp :: Env -> Program -> Program
 evalp env program = case program of
     []     -> []
-    ex:exs -> case ex of
-        Defglobal (Atom a) e -> evalp (\atom -> if atom == (Atom a) then e else env atom) exs
-        _                    -> (eval env ex) : (evalp env exs)
+    ex:exs -> (eval env ex) : (evalp env exs)
 
 -- | Call to evalp with a blank environment (the ID function)
 interpretProgram = evalp (\x -> x)
