@@ -18,8 +18,8 @@
                     (else-branch))))))
 
 ;; Examples of using if
-(apply (apply (apply (if) (true)) (pick me!)) (dont pick me!))
-(apply (apply (apply (if) (false)) (dont pick me!)) (pick me!))
+((((if) (true)) (pick me!)) (dont pick me!))
+((((if) (false)) (dont pick me!)) (pick me!))
 
 ;; Pairs
 (defglobal (pair)
@@ -101,4 +101,4 @@
         (apply (y-combinator) (plus-helper))))
 
 ;; Testing
-(plus)
+(((plus) (0)) (3))
