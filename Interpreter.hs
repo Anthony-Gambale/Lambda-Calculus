@@ -20,14 +20,6 @@ eval env expr = case expr of
     Lambda (Atom a) b  -> Lambda (Atom a) b
     _                  -> error "Invalid lambda calculus expression."
 
--- | evalp for Evaluate Program
--- Use global environment to enable Defglobal expressions
--- evalp :: Env -> Program -> Program
--- evalp env program = case program of
---     []     -> []
---     ex:exs -> case ex of
---         Defglobal (Atom a) e -> evalp (\atom -> if atom == (Atom a) then e else env atom) exs
---         _                    -> (eval env ex) : (evalp env exs)
 evalp :: Env -> Program -> Program
 evalp env program = case program of
     []     -> []
