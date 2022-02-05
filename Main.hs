@@ -32,6 +32,8 @@ dropFinalWhitespace source = case source of
         ' ' -> dropFinalWhitespace (init source)
         _   -> source
 
+-- | Side effects
+
 displayProgram (ex:exs) = do
     print ex
     displayProgram exs
@@ -39,7 +41,6 @@ displayProgram (ex:exs) = do
 displayProgram [] = do
     putStrLn "Completed execution."
 
-main :: IO ()
 main = do
     putStrLn "Enter path to file:"
     path <- getLine
