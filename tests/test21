@@ -1,0 +1,14 @@
+
+;; Test the replacer
+
+(defglobal (identity)
+    (lambda (x) (x)))
+
+(defglobal (hw)
+    (apply (identity) (Hello, World!)))
+
+(hw)
+
+(apply
+    (lambda (identity) (identity))
+    (SHOW THIS TEXT))
