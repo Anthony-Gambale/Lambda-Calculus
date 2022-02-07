@@ -1,7 +1,7 @@
 # Lambda-Calculus
 Interpreter for the lambda calculus with lisp-like syntax.
 
-*Warning: This project is unfinished and may not give correct results in all cases.*
+*This project is unfinished and may not give correct results in all cases.*
 
 ## How to use
 The lambda expression `(\x.y x) z` would be written as
